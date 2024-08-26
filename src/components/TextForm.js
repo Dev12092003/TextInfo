@@ -21,7 +21,14 @@ const TextForm = (props) => {
         setText(newText);
     }
     const handleCopyClick = ()=>{
+        var newtext=document.getElementById("myBox");
+        newtext.select();
+        navigator.clipboard.writeText(newtext.value);
+    }
 
+    const handleExtraSpace = ()=>{
+        let newtext=text.split(/[ ]+/);
+        setText(newtext.join(" "));
     }
 
     const [text, setText] = useState('');
@@ -30,21 +37,23 @@ const TextForm = (props) => {
   
   return (
     <>
-        <div className="container">
+        <div className="container" style={{color:props.mode==='dark'?'white':'black'}}>
             <h1>{props.heading}</h1>
             <div className="mb-3">
-                <textarea className="form-control " value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
+                <textarea className="form-control " value={text} onChange={handleOnChange} id="myBox" rows="8" style={{backgroundColor:props.mode==='dark'?'gray':'white' , color:props.mode==='dark'?'white':'black'}}></textarea>
             </div>
             <button className='btn btn-primary mx-1' onClick={handleUpClick}>Conver to Uppercase</button>
             <button className='btn btn-primary mx-1' onClick={handleLowClick}>Conver to Lowercase</button>
             <button className='btn btn-primary mx-1' onClick={handleClearClick}>Clear Text</button>
-            <CopyToClipboard text={text} onCopy={(text, result) => console.log()  /* this is for th copy clipboard */}> 
+            {/* <CopyToClipboard text={text} onCopy={(text, result) => console.log()  // this is for th copy clipboard }> 
                 <button className='btn btn-primary mx-1'>Copy To Clipboard</button>
-            </CopyToClipboard>
+            </CopyToClipboard> */}
+            <button className='btn btn-primary mx-1' onClick={handleCopyClick}>Copy</button>
+            <button className='btn btn-primary mx-1' onClick={handleExtraSpace}>Remove Extra Space</button>
             
             
         </div>
-        <div className="container">
+        <div className="container" style={{color:props.mode==='dark'?'white':'black'}}>
             <h1>Your text summary</h1>
             <p>{text.split(" ").length} words and {text.length} character</p>
             <p>{0.008* text.split(" ").length} Minutes read</p>
