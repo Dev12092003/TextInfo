@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'RedditMono';
+    src: local('RedditMono'), url(textinfo\src\fonts\RedditMono-VariableFont_wght.ttf) format('truetype');
+  }
+@font-face {
+    font-family: 'SchibstedGrotesk';
+    src: local('SchibstedGrotesk'), url(textinfo\src\fonts\SchibstedGrotesk-VariableFont_wght.ttf) format('truetype');
+  }
