@@ -6,3 +6,6 @@
     font-family: 'SchibstedGrotesk';
     src: local('SchibstedGrotesk'), url(./fonts/SchibstedGrotesk-VariableFont_wght.ttf) format('truetype');
   }
+.according-button::after{
+  filter:invert(1);
+}
