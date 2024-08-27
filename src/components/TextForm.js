@@ -27,6 +27,7 @@ const TextForm = (props) => {
         var newtext=document.getElementById("myBox");
         newtext.select();
         navigator.clipboard.writeText(newtext.value);
+        document.getSelection().removeAllRanges();
         props.showAlert("Text Copied","success");
     }
 
@@ -47,21 +48,21 @@ const TextForm = (props) => {
             <div className="mb-3">
                 <textarea className="form-control " value={text} onChange={handleOnChange} id="myBox" rows="8" style={{backgroundColor:props.mode==='dark'?'#212224':'white' , color:props.mode==='dark'?'white':'black'}}></textarea>
             </div>
-            <button className='btn btn-primary mx-1' onClick={handleUpClick}>Conver to Uppercase</button>
-            <button className='btn btn-primary mx-1' onClick={handleLowClick}>Conver to Lowercase</button>
-            <button className='btn btn-primary mx-1' onClick={handleClearClick}>Clear Text</button>
+            <button disabled={text.length===0} className='btn btn-primary mx-1 my-1' onClick={handleUpClick}>Conver to Uppercase</button>
+            <button disabled={text.length===0} className='btn btn-primary mx-1 my-1' onClick={handleLowClick}>Conver to Lowercase</button>
+            <button disabled={text.length===0} className='btn btn-primary mx-1 my-1' onClick={handleClearClick}>Clear Text</button>
             {/* <CopyToClipboard text={text} onCopy={(text, result) => console.log()  // this is for th copy clipboard }> 
                 <button className='btn btn-primary mx-1'>Copy To Clipboard</button>
             </CopyToClipboard> */}
-            <button className='btn btn-primary mx-1' onClick={handleCopyClick}>Copy</button>
-            <button className='btn btn-primary mx-1' onClick={handleExtraSpace}>Remove Extra Space</button>
+            <button disabled={text.length===0} className='btn btn-primary mx-1 my-1' onClick={handleCopyClick}>Copy</button>
+            <button disabled={text.length===0} className='btn btn-primary mx-1 my-1' onClick={handleExtraSpace}>Remove Extra Space</button>
             
             
         </div>
         <div className="container" style={{color:props.mode==='dark'?'white':'black'}}>
             <h1>Your text summary</h1>
-            <p>{text.split(" ").length} words and {text.length} character</p>
-            <p>{0.008* text.split(" ").length} Minutes read</p>
+            <p>{text.split(" ").filter((element)=>{return element.length!==0}).length} words and {text.length} character</p>
+            <p>{0.008* text.split(" ").filter((element)=>{return element.length!==0}).length} Minutes read</p>
             <h2>Preview</h2>
             <p>{text}</p>
         </div>
